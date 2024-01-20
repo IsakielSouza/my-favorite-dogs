@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "my-dogs-favorite",
-    "slug": "my-dogs-favorite",
+    "slug": "my-app-dog",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b4eae9d5-94bd-4e4a-b73a-2f9418b65fc6"
+      }
+    },
+    "owner": "isakielsouza",
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
