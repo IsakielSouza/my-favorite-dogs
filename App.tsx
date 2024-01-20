@@ -5,7 +5,7 @@ import { Loading } from '@Components/Loading';
 
 import theme from './src/theme'
 
-import { SignIn } from '@Modules/Authentication/Presentation/Pages/SignIn/SignIn';
+import { SignIn } from '@Modules/Authentication/Pages/SignIn/SignIn';
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
