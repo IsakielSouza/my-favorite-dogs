@@ -6,7 +6,8 @@ import { Loading } from '@Components/Loading';
 
 import theme from './src/theme'
 
-import { Home } from '@Modules/Dog/Pages/Home/Home';
+import SignIn from '@Modules/Authentication/Pages/SignIn';
+import SignUp from '@Modules/Authentication/Pages/SignUp';
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
@@ -19,9 +20,8 @@ export default function App() {
             backgroundColor="transparent"
             translucent
             />
-        { fontsLoaded ? <Home/> : <Loading /> }
+        { fontsLoaded ? <SignIn/> : <Loading /> }
       </ThemeProvider>
-    </SafeAreaProvider>
-    
+      </SafeAreaProvider>
   );
 }

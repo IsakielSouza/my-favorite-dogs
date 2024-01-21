@@ -10,9 +10,6 @@
       "@Components/*": [
         "src/Components/*"
       ],
-      "@Routes/*": [
-        "./src/Routes/*"
-      ],
       "@Modules/*": [
         "src/Modules/*"
       ],
