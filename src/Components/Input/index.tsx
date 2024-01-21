@@ -10,6 +10,7 @@ export function Input({ ...rest }: TextInputProps) {
     <Container
       placeholderTextColor={COLORS.GRAY_300}
       onSubmitEditing={Keyboard.dismiss}
+      cursorColor={COLORS.VIOLET_700}
       {...rest} 
     />
   )
