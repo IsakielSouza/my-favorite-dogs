@@ -3,16 +3,17 @@ import { View } from 'react-native'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
 import { AuthRoutes } from './auth.routes';
+import { AppRoutes } from './app.routes';
 
 export function Routes() {
   const { COLORS } = useTheme();
 
   const theme = DefaultTheme;
-  theme.colors.background = COLORS.WHITE
+
   return (
     <View style={[{ flex:1, backgroundColor: COLORS.WHITE }]}>
-      <NavigationContainer>
-        <AuthRoutes />
+      <NavigationContainer theme={theme}>
+        <AppRoutes />
       </NavigationContainer>
     </View>
   );
