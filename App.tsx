@@ -15,7 +15,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <SafeAreaProvider>
         <StatusBar 
-            barStyle="dark-content"
+            barStyle="light-content"
             backgroundColor="transparent"
             translucent
             />
