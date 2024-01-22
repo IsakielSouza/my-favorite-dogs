@@ -8,7 +8,7 @@ export default {
 
     RED: '#F75A68',
     RED_DARK: '#AA2834',
-
+        
     GRAY_700: '#121214',
     GRAY_600: '#202024',
     GRAY_500: '#29292E',
@@ -16,8 +16,12 @@ export default {
     GRAY_300: '#7C7C8A',
     GRAY_200: '#C4C4CC',
     GRAY_100: '#E1E1E6',
-
-    VIOLET_700: '#632CA6'
+    
+    RICK_BLACK: '#04151F',
+    SLATE_GRAY_DARK: '#183a37',
+    VIOLET_700: '#632CA6',
+    MAHOGANY: '#C44900',
+    PURPLE_DARK: '#432534',
   },
   FONT_FAMILY: {
     REGULAR: 'Roboto_400Regular',

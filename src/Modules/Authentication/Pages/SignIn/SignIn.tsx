@@ -1,9 +1,11 @@
 import { Keyboard, Text, TouchableWithoutFeedback } from 'react-native';
 import { Header } from '@Components/Header';
 import { Button } from '@Components/Button';
-import { Container, BoxInput } from './styles';
+import { Container, Logo, WrapperInput, ContainerLogo, Title } from './styles';
 import { Input } from '@Components/Input';
 import { ButtonIcon } from '@Components/ButtonIcon';
+
+import LogoPng from '@Assets/logo.png';
 
 export function SignIn() {
  
@@ -12,35 +14,44 @@ export function SignIn() {
       onPress={() => Keyboard.dismiss()}
     >
       <Container>
-        <Header/>
-        <Text>SignIn</Text>
-
-      <BoxInput>
+        <ContainerLogo>
+      <Logo 
+        source={LogoPng}
+        />
+        <Title>Acesse sua conta</Title>
+        </ContainerLogo>
+      
+      <WrapperInput>
       <Input
-        placeholder='Email'
-        inputMode={'email'}
+        placeholder='E-mail'
+        keyboardType='email-address'
+        autoCapitalize='none'
       />
       <ButtonIcon
           icon='email'
         />
-      </BoxInput>
-      
-
-      <BoxInput>
+      </WrapperInput>
+      <WrapperInput>
         <Input
           placeholder='Senha'
           secureTextEntry
           autoCorrect={false}
-          returnKeyType='go'
         />
-
         <ButtonIcon
           icon='visibility'
         />
-      </BoxInput>
+      </WrapperInput>
+        
+      <Button title='Acessar'/>
+      
 
-      <Button title='Entrar'></Button>
-      <Button title='Cria conta' type = 'SECONDARY' ></Button>
+     
+        
+        <Button 
+          title='Cria conta'
+          type = 'SECONDARY'
+        />
+      
         
       </Container>
     </TouchableWithoutFeedback>
