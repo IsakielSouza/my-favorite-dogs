@@ -1,5 +1,4 @@
 import { Keyboard, ScrollView, Text, TouchableWithoutFeedback } from 'react-native';
-import { Header } from '@Components/Header';
 import { Button } from '@Components/Button';
 import { Container, Logo, WrapperInput, ContainerLogo, Title, WrapperFooter } from './styles';
 import { Input } from '@Components/Input';
