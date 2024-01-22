@@ -8,6 +8,7 @@ import { ButtonIcon } from '@Components/ButtonIcon';
 import { AuthNavigatorRoutesProps } from '@Routes/auth.routes';
 
 import LogoImg from '@Assets/logo.png';
+import { useShowPassword } from '@Modules/Authentication/Hooks/useShowPassword';
 
 export function SignIn() {
   const { navigate } = useNavigation<AuthNavigatorRoutesProps>();
@@ -15,6 +16,8 @@ export function SignIn() {
   function handleSignUp() {
     navigate('signUp')
   }
+
+  const { showPassword, handleShowPassword } = useShowPassword();
 
   return (
     <TouchableWithoutFeedback
@@ -43,11 +46,12 @@ export function SignIn() {
           <WrapperInput>
             <Input
               placeholder='Senha'
-              secureTextEntry
+              secureTextEntry={showPassword}
               autoCorrect={false}
             />
             <ButtonIcon
-              icon='visibility'
+              icon={ showPassword ? 'visibility' : 'visibility-off' }
+              onPress={handleShowPassword}
             />
           </WrapperInput>
           <Button title='Acessar'/>

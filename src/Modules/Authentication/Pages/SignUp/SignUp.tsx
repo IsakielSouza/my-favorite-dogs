@@ -6,6 +6,7 @@ import { Input } from '@Components/Input';
 import { ButtonIcon } from '@Components/ButtonIcon';
 
 import LogoImg from '@Assets/logo.png';
+import { useShowPassword } from '@Modules/Authentication/Hooks/useShowPassword';
 
 export function SignUp() {
   const { goBack } = useNavigation();
@@ -13,6 +14,8 @@ export function SignUp() {
   function handleSignIn() {
    goBack()
   }
+
+  const { showPassword, handleShowPassword } = useShowPassword()  
 
   return (
     <TouchableWithoutFeedback
@@ -50,11 +53,12 @@ export function SignUp() {
           <WrapperInput>
             <Input
               placeholder='Senha'
-              secureTextEntry
+              secureTextEntry={showPassword}
               autoCorrect={false}
             />
             <ButtonIcon
-              icon='visibility'
+              icon={ showPassword ? 'visibility' : 'visibility-off' }
+              onPress={handleShowPassword}
             />
           </WrapperInput>
           <Button title='Criar e acessar'/>
