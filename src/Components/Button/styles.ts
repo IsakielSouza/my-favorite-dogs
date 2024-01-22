@@ -8,17 +8,18 @@ type Props = {
 }
 
 export const Container = styled(TouchableOpacity)<Props>`
+${({ theme, type }) => css`
   flex: 1;
   min-height: 56px;
   max-height: 56px;
-  background-color: ${({ theme, type }) => type === 'PRIMARY' ? theme.COLORS.VIOLET_700 : "transparent"};
-  border-width: ${({ type }) => type === 'PRIMARY' ? 0 : 1};
-  border-color: ${({ theme }) => theme.COLORS.VIOLET_700 };
+  background-color: ${ type === 'PRIMARY' ? theme.COLORS.VIOLET_700 : "transparent"};
+  border-width: ${ type === 'PRIMARY' ? 0 : '1px'};
+  border-color: ${ theme.COLORS.VIOLET_700 };
   border-radius: 6px;
   
   justify-content: center;
   align-items: center;
-
+  `}
 `;
 
 export const Title = styled(Text)<Props>`
