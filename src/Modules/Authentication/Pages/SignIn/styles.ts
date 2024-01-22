@@ -4,13 +4,14 @@ export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.COLORS.GRAY_100};
   padding: 24px;
+  padding-bottom: 24px;
 `;
 
 export const ContainerLogo = styled.View`
   justify-content: center;
   align-items: center;
   padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 100px;
 `;
 
 export const Title = styled.Text`
@@ -33,4 +34,11 @@ export const WrapperInput = styled.View`
   flex-direction: row;
   justify-content: center;
   border-radius: 6px;
+`;
+
+export const WrapperFooter = styled.View`
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+  padding-bottom: 20px;
 `;
