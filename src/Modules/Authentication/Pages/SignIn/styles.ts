@@ -11,7 +11,6 @@ export const ContainerLogo = styled.View`
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
- /*  background-color: red; */
 `;
 
 export const Title = styled.Text`
@@ -31,7 +30,6 @@ export const WrapperInput = styled.View`
   width: 100%;
   margin-bottom: 16px;
   background-color: ${({ theme }) => theme.COLORS.GRAY_200};
-  
   flex-direction: row;
   justify-content: center;
   border-radius: 6px;
