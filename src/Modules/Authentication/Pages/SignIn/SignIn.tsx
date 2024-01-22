@@ -1,13 +1,21 @@
+import { useNavigation } from '@react-navigation/native';
 import { Keyboard, ScrollView, Text, TouchableWithoutFeedback } from 'react-native';
 import { Button } from '@Components/Button';
 import { Container, Logo, WrapperInput, ContainerLogo, Title, WrapperFooter } from './styles';
 import { Input } from '@Components/Input';
 import { ButtonIcon } from '@Components/ButtonIcon';
 
-import LogoPng from '@Assets/logo.png';
+import { AuthNavigatorRoutesProps } from '@Routes/auth.routes';
+
+import LogoImg from '@Assets/logo.png';
 
 export function SignIn() {
+  const { navigate } = useNavigation<AuthNavigatorRoutesProps>();
  
+  function handleSignUp() {
+    navigate('signUp')
+  }
+
   return (
     <TouchableWithoutFeedback
       onPress={() => Keyboard.dismiss()}
@@ -16,7 +24,8 @@ export function SignIn() {
         <Container>
           <ContainerLogo>
         <Logo 
-          source={LogoPng}
+          source={LogoImg}
+          defaultSource={LogoImg}
           />
           <Title>Acesse sua conta</Title>
           </ContainerLogo>
@@ -47,6 +56,7 @@ export function SignIn() {
             <Button 
               title='Criar conta'
               type = 'SECONDARY'
+              onPress={handleSignUp}
             />
           </WrapperFooter>
         </Container>

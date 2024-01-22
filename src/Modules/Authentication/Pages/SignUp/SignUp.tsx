@@ -1,13 +1,19 @@
+import { useNavigation } from '@react-navigation/native';
 import { Keyboard, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { Button } from '@Components/Button';
 import { Container, Logo, WrapperInput, ContainerLogo, Title, WrapperFooter } from './styles';
 import { Input } from '@Components/Input';
 import { ButtonIcon } from '@Components/ButtonIcon';
 
-import LogoPng from '@Assets/logo.png';
+import LogoImg from '@Assets/logo.png';
 
 export function SignUp() {
+  const { goBack } = useNavigation();
  
+  function handleSignIn() {
+   goBack()
+  }
+
   return (
     <TouchableWithoutFeedback
       onPress={() => Keyboard.dismiss()}
@@ -16,7 +22,8 @@ export function SignUp() {
         <Container>
           <ContainerLogo>
         <Logo 
-          source={LogoPng}
+          source={LogoImg}
+          defaultSource={LogoImg}
           />
           <Title>Crie sua conta</Title>
           </ContainerLogo>
@@ -55,6 +62,7 @@ export function SignUp() {
             <Button 
               title='Voltar para login'
               type = 'SECONDARY'
+              onPress={handleSignIn}
             />
           </WrapperFooter>
         </Container>
