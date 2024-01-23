@@ -1,7 +1,9 @@
 import React from 'react' 
 import { FlatList } from 'react-native';
-import { Container, DogImage, DogWrapper, Header, Photo, User, UserGreeting, UserInfo, UserName, UserWrapper } from './styles'
-import { ButtonIcon } from '@Components/ButtonIcon';
+import { Container } from './styles'
+
+import { Header } from '@Modules/Dog/Components/Header';
+import { BoxDog } from '@Modules/Dog/Components/BoxDog';
 
 const user = {
   avatar: 'https://avatars.githubusercontent.com/u/46832485?v=4',
@@ -66,36 +68,19 @@ const data = [
 export function Home() {
   return (
     <Container>
-      <Header>
-        <UserWrapper>
-              <UserInfo>
-                <Photo
-                  source={{
-                    uri: user.avatar,
-                  }}
-                />
-                <User>
-                  <UserGreeting>Olá,</UserGreeting>
-                  <UserName>{user.name}</UserName>
-                </User>
-              </UserInfo>
-        </UserWrapper>
-      </Header>
+      <Header
+				user={user}
+			/>
 
 			<FlatList 
 				data={data}
 				keyExtractor={item => item.id}
 				renderItem={({item }) => 
-						<DogWrapper>
-        			<DogImage 
-            		source={{ uri: item.url }}
-          		/>
-         			<ButtonIcon
-								style={[{alignSelf: 'flex-end' }]}				 
-								icon='favorite-outline'
-								onPress={()=> console.log('FAVORITADO', item.id)}
-		          ></ButtonIcon>
-    			  </DogWrapper>
+					<BoxDog 
+							item={item}
+							icon='favorite-outline'
+							OnPress={() => console.log("Like the Dog:", item.id)}
+					/>
 				}
 			/>      
     </Container>
