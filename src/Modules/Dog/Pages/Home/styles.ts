@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import {
   getStatusBarHeight,
@@ -11,7 +11,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-  height:${RFPercentage(25)}px;
+  height:${ RFPercentage(20)}px;
   background-color: ${({ theme }) => theme.COLORS.VIOLET_700};
 
   align-items: flex-start;
@@ -36,38 +36,42 @@ export const UserInfo = styled.View`
 `;
 
 export const Photo = styled.Image`
-  width: ${RFValue(70)}px;
-  height: ${RFValue(70)}px;
+  width: ${ RFValue(55)}px;
+  height: ${ RFValue(55)}px;
 
   border-radius: 10px;
 `;
 
 export const User = styled.View`
-  margin-left: 17px;
+  margin-left: 16px;
 `;
 
 export const UserGreeting = styled.Text`
-  color: ${({ theme }) => theme.COLORS.WHITE};
-  font-size: ${RFValue(25)}px;
-  font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
+  ${({ theme }) => css`
+  font-size: ${ theme.FONT_SIZE.MD}px;
+  color: ${ theme.COLORS.WHITE};
+  font-family: ${ theme.FONT_FAMILY.REGULAR};
+  `}
 `;
 
 export const UserName = styled.Text`
-  color: ${({ theme }) => theme.COLORS.WHITE};
-  font-size: ${RFValue(25)}px;
-  font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
+  ${({ theme }) => css`
+    color: ${ theme.COLORS.WHITE};
+    font-size: ${ theme.FONT_SIZE.LG}px;
+    font-family: ${ theme.FONT_FAMILY.BOLD};
+  `}
 `;
 
 export const DogWrapper = styled.View`
   padding: 8px;
-  background-color: ${({theme})=>theme.COLORS.GRAY_100};
+  background-color: ${({ theme })=>theme.COLORS.GRAY_100};
 `;
 
 export const DogImage = styled.Image.attrs({
   resizeMode: 'cover',
 })`
   width: 100%;
-  height: 70%;
+  height: 350px;
   margin-top: 10px;
   border-radius: 6px;
 `;
