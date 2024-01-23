@@ -9,12 +9,29 @@ import { AuthNavigatorRoutesProps } from '@Routes/auth.routes';
 
 import LogoImg from '@Assets/logo.png';
 import { useShowPassword } from '@Modules/Authentication/Hooks/useShowPassword';
+import { Controller, useForm } from 'react-hook-form';
+import { TitleAlertForm } from '../SignUp/styles';
+
+import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
+
+type FormData = {
+  email: string;
+  password: string;
+}
 
 export function SignIn() {
+  const { signIn } = useAuth()
+  
   const { navigate } = useNavigation<AuthNavigatorRoutesProps>();
+
+  const { control, handleSubmit, formState: { errors } } = useForm<FormData>()
  
   function handleSignUp() {
     navigate('signUp')
+  }
+
+  function handleSignIn({ email, password }: FormData){
+    signIn(email, password);
   }
 
   const { showPassword, handleShowPassword } = useShowPassword();
@@ -32,29 +49,53 @@ export function SignIn() {
           />
           <Title>Acesse sua conta</Title>
           </ContainerLogo>
-        
-          <WrapperInput>
-          <Input
-            placeholder='E-mail'
-            keyboardType='email-address'
-            autoCapitalize='none'
+
+          <Controller 
+            control={control}
+            name="email"
+            rules={{ required: 'Informe o e-mail' }}
+            render={({ field: { onChange } }) => (
+              <WrapperInput>
+                <Input
+                  placeholder='E-mail'
+                  keyboardType='email-address'
+                  onChangeText={onChange}
+                  autoCapitalize='none'
+                />
+                <ButtonIcon
+                    icon='email'
+                  />
+              </WrapperInput>
+            )}
           />
-          <ButtonIcon
-              icon='email'
-            />
-          </WrapperInput>
-          <WrapperInput>
-            <Input
-              placeholder='Senha'
-              secureTextEntry={showPassword}
-              autoCorrect={false}
-            />
-            <ButtonIcon
-              icon={ showPassword ? 'visibility' : 'visibility-off' }
-              onPress={handleShowPassword}
-            />
-          </WrapperInput>
-          <Button title='Acessar'/>
+        {errors.email?.message && <TitleAlertForm>{errors.email?.message}</TitleAlertForm>}
+        
+        <Controller 
+            control={control}
+            name="password"
+            rules={{ required: 'Informe a senha' }}
+            render={({ field: { onChange } }) => (
+              <WrapperInput>
+                <Input
+                  placeholder='Senha'
+                  onChangeText={onChange}
+                  secureTextEntry={showPassword}
+                  autoCorrect={false}
+                />
+                <ButtonIcon
+                  icon={ showPassword ? 'visibility' : 'visibility-off' }
+                  onPress={handleShowPassword}
+                />
+              </WrapperInput>
+            )}
+        />
+        {errors.password?.message && <TitleAlertForm>{errors.password?.message}</TitleAlertForm>}
+
+        <Button
+          title='Acessar'
+          onPress={handleSubmit(handleSignIn)}
+        />
+
           <WrapperFooter>
             <Text style={[{marginBottom: 5, color: 'grey', fontSize: 14}]}>Ainda não tem acesso?</Text>
             <Button 
@@ -63,6 +104,7 @@ export function SignIn() {
               onPress={handleSignUp}
             />
           </WrapperFooter>
+
         </Container>
       </ScrollView>
     </TouchableWithoutFeedback>

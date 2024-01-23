@@ -1,18 +1,18 @@
-import { useContext } from 'react';
 import { useTheme } from 'styled-components/native'
 import { View } from 'react-native'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
-import { AuthContext } from '@Modules/Authentication/Contexts/AuthContext';
 import { AuthRoutes } from './auth.routes';
+import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
+
 import { AppRoutes } from './app.routes';
 
 export function Routes() {
   const { COLORS } = useTheme();
 
-  const contextData = useContext(AuthContext);
+  const { user } = useAuth()
 
-  console.log("USUÁRIO LOGADO =>", contextData);
+  console.log("USUÁRIO LOGADO =>", user);
 
   const theme = DefaultTheme;
 
