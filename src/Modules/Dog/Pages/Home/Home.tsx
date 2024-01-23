@@ -4,6 +4,7 @@ import { Container } from './styles'
 
 import { Header } from '@Modules/Dog/Components/Header';
 import { BoxDog } from '@Modules/Dog/Components/BoxDog';
+import { ListEmpty } from '@Components/ListEmpty';
 
 const user = {
   avatar: 'https://avatars.githubusercontent.com/u/46832485?v=4',
@@ -82,6 +83,10 @@ export function Home() {
 							OnPress={() => console.log("Like the Dog:", item.id)}
 					/>
 				}
+				showsVerticalScrollIndicator={false}
+				ListEmptyComponent={<ListEmpty 
+					message='Listagem de items vazia'
+				/>}
 			/>      
     </Container>
   )
