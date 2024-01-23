@@ -6,13 +6,18 @@ import { AuthRoutes } from './auth.routes';
 import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
 
 import { AppRoutes } from './app.routes';
+import { Loading } from '@Components/Loading';
 
 export function Routes() {
   const { COLORS } = useTheme();
 
-  const { user } = useAuth()
+  const { user, isLoadingUserStorageData } = useAuth()
 
   const theme = DefaultTheme;
+
+  if(isLoadingUserStorageData) {
+    return <Loading />
+  }
 
   return (
     <View style={[{ flex:1, backgroundColor: COLORS.WHITE }]}>

@@ -1,0 +1,3 @@
+const USER_STORAGE = '@USER_STORAGE';
+
+export { USER_STORAGE }
