@@ -12,14 +12,12 @@ export function Routes() {
 
   const { user } = useAuth()
 
-  console.log("USUÁRIO LOGADO =>", user);
-
   const theme = DefaultTheme;
 
   return (
     <View style={[{ flex:1, backgroundColor: COLORS.WHITE }]}>
       <NavigationContainer theme={theme}>
-        <AuthRoutes />
+        { user.id ? <AppRoutes /> : <AuthRoutes /> }
       </NavigationContainer>
     </View>
   );

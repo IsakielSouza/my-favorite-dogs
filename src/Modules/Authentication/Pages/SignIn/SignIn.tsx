@@ -1,5 +1,13 @@
+import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { Keyboard, ScrollView, Text, TouchableWithoutFeedback } from 'react-native';
+import { 
+  Keyboard,
+  ScrollView,
+  Text,
+  TouchableWithoutFeedback,
+  Alert
+}
+from 'react-native';
 import { Button } from '@Components/Button';
 import { Container, Logo, WrapperInput, ContainerLogo, Title, WrapperFooter } from './styles';
 import { Input } from '@Components/Input';
@@ -7,12 +15,14 @@ import { ButtonIcon } from '@Components/ButtonIcon';
 
 import { AuthNavigatorRoutesProps } from '@Routes/auth.routes';
 
-import LogoImg from '@Assets/logo.png';
 import { useShowPassword } from '@Modules/Authentication/Hooks/useShowPassword';
 import { Controller, useForm } from 'react-hook-form';
-import { TitleAlertForm } from '../SignUp/styles';
-
 import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
+
+import { TitleAlertForm } from '../SignUp/styles';
+import { AppError } from '@Utils/AppError';
+import LogoImg from '@Assets/logo.png';
+import { Loading } from '@Components/Loading';
 
 type FormData = {
   email: string;
@@ -20,6 +30,7 @@ type FormData = {
 }
 
 export function SignIn() {
+  const [isLoading, setIsLoading] = useState(false)
   const { signIn } = useAuth()
   
   const { navigate } = useNavigation<AuthNavigatorRoutesProps>();
@@ -30,11 +41,28 @@ export function SignIn() {
     navigate('signUp')
   }
 
-  function handleSignIn({ email, password }: FormData){
-    signIn(email, password);
+  async function handleSignIn({ email, password }: FormData){
+    try {
+      setIsLoading(true);
+      await signIn(email, password);
+
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+
+      const title = isAppError ? error.message : 'Não foi possível entrar. Tente novamente mais tarde.'
+      
+      Alert.alert( 'Aviso', title)
+
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const { showPassword, handleShowPassword } = useShowPassword();
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <TouchableWithoutFeedback
