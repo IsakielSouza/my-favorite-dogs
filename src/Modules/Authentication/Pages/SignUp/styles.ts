@@ -39,6 +39,16 @@ export const WrapperInput = styled.View`
 export const WrapperFooter = styled.View`
   justify-content: center;
   align-items: center;
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 20px;
+`;
+
+
+export const TitleAlertForm = styled.Text`
+  ${({ theme }) => css`
+    font-family: ${ theme.FONT_FAMILY.BOLD};
+    font-size: ${({ theme })=> theme.FONT_SIZE.SM}px;
+    color: ${ theme.COLORS.RED};
+    margin-bottom: 10px;
+  `}
 `;
