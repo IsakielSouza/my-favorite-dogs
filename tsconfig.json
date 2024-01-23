@@ -19,6 +19,9 @@
       "@Routes/*": [
         "src/Routes/*"
       ],
+      "@Utils/*": [
+        "src/Utils/*"
+      ]
     }
   }
 }
