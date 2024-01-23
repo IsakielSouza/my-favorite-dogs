@@ -1,4 +1,5 @@
 import React from 'react' 
+import { FlatList } from 'react-native';
 import { Container, DogImage, DogWrapper, Header, Photo, User, UserGreeting, UserInfo, UserName, UserWrapper } from './styles'
 import { ButtonIcon } from '@Components/ButtonIcon';
 
@@ -7,7 +8,7 @@ const user = {
   name: 'Isakiel'
 }
 
-const data  = [
+const data = [
 	{
 		"breeds": [],
 		"id": "HytzV6aNm",
@@ -62,7 +63,6 @@ const data  = [
 		"height": 332
 	}
 ]
-
 export function Home() {
   return (
     <Container>
@@ -81,18 +81,23 @@ export function Home() {
               </UserInfo>
         </UserWrapper>
       </Header>
-      
-      <DogWrapper>
-        <DogImage 
-            source={{ uri: 'https://cdn2.thedogapi.com/images/1d4rlnsPt.jpg' }}
-          />
-         <ButtonIcon
-						style={[{alignSelf: 'flex-end' }]}				 
-          	icon='favorite-outline'
-          	onPress={()=> console.log('FAVORITADO')}
-						
-          ></ButtonIcon>
-      </DogWrapper>
+
+			<FlatList 
+				data={data}
+				keyExtractor={item => item.id}
+				renderItem={({item }) => 
+						<DogWrapper>
+        			<DogImage 
+            		source={{ uri: item.url }}
+          		/>
+         			<ButtonIcon
+								style={[{alignSelf: 'flex-end' }]}				 
+								icon='favorite-outline'
+								onPress={()=> console.log('FAVORITADO', item.id)}
+		          ></ButtonIcon>
+    			  </DogWrapper>
+				}
+			/>      
     </Container>
   )
 }
