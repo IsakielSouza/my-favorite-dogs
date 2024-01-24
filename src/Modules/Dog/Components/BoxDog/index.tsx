@@ -1,5 +1,5 @@
 import React from 'react'
-import { DogImage, DogWrapper } from './styles'
+import { DogImage, DogWrapper, SeparatorItem } from './styles'
 import { ButtonIcon } from '@Components/ButtonIcon'
 import { MaterialIcons } from '@expo/vector-icons'
 
@@ -23,6 +23,7 @@ export function BoxDog({ item, icon, OnPress }: Props ) {
 				icon={icon}
 				onPress={OnPress}
 			/>
+			<SeparatorItem />
 		</DogWrapper>
   )
 }
