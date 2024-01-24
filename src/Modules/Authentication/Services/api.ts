@@ -3,7 +3,7 @@ import axios from "axios";
 import { AppError } from "@Utils/AppError";
 
 const api = axios.create({
-  baseURL: 'http://192.168.3.11:3333'
+  baseURL: 'https://api-jwt-jl1g.onrender.com'
 });
 
 api.interceptors.response.use((response) => response, (error) => {
