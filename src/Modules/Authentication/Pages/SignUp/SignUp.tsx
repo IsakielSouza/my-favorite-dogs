@@ -16,6 +16,7 @@ import { AppError } from '@Utils/AppError';
 
 
 import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
+import { Loading } from '@Components/Loading';
 
 type FormDataProps = {
   name: string;
@@ -48,6 +49,7 @@ export function SignUp() {
       
       await api.post('/users', { name, email, password });
       await signIn(email, password)
+
     } catch (error) {
       const isAppError = error instanceof AppError;
 
@@ -63,7 +65,11 @@ export function SignUp() {
     resolver: yupResolver(signUpSchema),
   });
   
-  const { showPassword, handleShowPassword } = useShowPassword()  
+  const { showPassword, handleShowPassword } = useShowPassword();
+
+  if(isLoading) {
+    return<Loading />
+  }
 
   return (
     <TouchableWithoutFeedback
