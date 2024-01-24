@@ -3,15 +3,10 @@ import { Alert } from 'react-native'
 import { api, headers } from '@Modules/Dog/Services/api'
 import { msDogPrefixes } from '@Modules/Dog/Services/prefixes'
 import { AppError } from '@Utils/AppError';
-
-type DogProp = {
-	id: string;
-	url: string
-}
-
+import { DogDTO } from '../Components/Dtos/DogDTO';
 
 export function useFetcherDogs() {
-  const [dogs, setDogs] = useState<DogProp[]>([])
+  const [dogs, setDogs] = useState<DogDTO[]>([])
   const [loading, setLoading] = useState(true)
 
   async function fetchDogs() {
