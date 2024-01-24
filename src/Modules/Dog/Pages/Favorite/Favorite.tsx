@@ -5,9 +5,9 @@ import { Container, Header, Title } from './styles'
 import { BoxDog } from '@Modules/Dog/Components/BoxDog';
 import { ListEmpty } from '@Components/ListEmpty';
 import { DogDTO } from '@Modules/Dog/Components/Dtos/DogDTO';
-import { storageAuthTokenGet } from '@Storage/storageAuthToken';
 import { useFocusEffect } from '@react-navigation/native';
 import { storageFavoriteDogGet } from '@Storage/storageFavoriteDog';
+import { useRemoveDogFavorite } from '@Modules/Dog/Hooks/useRemoveDogFavorite';
 
 export function Favorite() {
 	const [dogs, setDogs] = useState<DogDTO[]>([])
@@ -16,9 +16,11 @@ export function Favorite() {
 		setDogs(listDogs)
 	}
 
+	const { handleRemoverFavorite } = useRemoveDogFavorite()
+
 	useFocusEffect(useCallback(() => {
     fetchDogs()
-  },[]))
+  },[dogs]))
 
   return (
     <Container>
@@ -33,7 +35,7 @@ export function Favorite() {
 					<BoxDog 
 							item={item}
 							icon='heart-broken'
-							OnPress={() => console.log("Dislike the Dog:", item.id)}
+							OnPress={() => handleRemoverFavorite(item)}
 					/>
 				}
 				showsVerticalScrollIndicator={false}

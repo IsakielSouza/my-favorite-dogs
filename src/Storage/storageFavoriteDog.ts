@@ -7,6 +7,11 @@ export async function storageFavoriteDogSave(dog: DogDTO) {
   try {
     const storedDogs = await storageFavoriteDogGet();
 
+    storedDogs.map((item)=> {
+      item.id === dog.id
+      return 
+    })
+
     const storage = JSON.stringify([...storedDogs, dog])
 
     await AsyncStorage.setItem(DOG_FAVORITE, storage)
@@ -28,6 +33,14 @@ export async function storageFavoriteDogGet() {
   }
 }
 
-export async function storageFavoriteDogRemove() {
-  await AsyncStorage.removeItem(DOG_FAVORITE);
+export async function storageFavoriteDogRemove(item:DogDTO) {
+  try {
+    const storedDogs = await storageFavoriteDogGet();
+    const dogs = storedDogs.filter(dog => dog.id !== item.id)
+    
+    await AsyncStorage.setItem(DOG_FAVORITE, JSON.stringify(dogs))
+  } catch (error) {
+    throw error;
+  }
+
 }
