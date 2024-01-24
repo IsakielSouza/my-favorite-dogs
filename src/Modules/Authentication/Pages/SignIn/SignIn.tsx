@@ -82,13 +82,14 @@ export function SignIn() {
             control={control}
             name="email"
             rules={{ required: 'Informe o e-mail' }}
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <WrapperInput>
                 <Input
                   placeholder='E-mail'
                   keyboardType='email-address'
                   onChangeText={onChange}
                   autoCapitalize='none'
+                  value={value}
                 />
                 <ButtonIcon
                     icon='email'
@@ -102,13 +103,14 @@ export function SignIn() {
             control={control}
             name="password"
             rules={{ required: 'Informe a senha' }}
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <WrapperInput>
                 <Input
                   placeholder='Senha'
                   onChangeText={onChange}
                   secureTextEntry={showPassword}
                   autoCorrect={false}
+                  value={value}
                 />
                 <ButtonIcon
                   icon={ showPassword ? 'visibility' : 'visibility-off' }

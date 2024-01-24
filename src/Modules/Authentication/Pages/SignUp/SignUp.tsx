@@ -39,7 +39,7 @@ export function SignUp() {
   const { signIn } = useAuth();
 
   function handleGoBack() {
-    navigation.navigate('signUp');
+    navigation.navigate('signIn');
   }
 
   async function handleSignUp({ name, email, password }: FormDataProps) {
