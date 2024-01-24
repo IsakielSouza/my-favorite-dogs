@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Alert, Keyboard, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Container, Logo, WrapperInput, ContainerLogo, Title, WrapperFooter, TitleAlertForm } from './styles';
@@ -12,6 +13,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { api } from '@Modules/Authentication/Services/api';
 import { AppError } from '@Utils/AppError';
+
+
+import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
 
 type FormDataProps = {
   name: string;
@@ -28,7 +32,11 @@ const signUpSchema = yup.object({
 });
 
 export function SignUp() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
+
+  const { signIn } = useAuth();
 
   function handleGoBack() {
     navigation.navigate('signUp');
@@ -36,14 +44,18 @@ export function SignUp() {
 
   async function handleSignUp({ name, email, password }: FormDataProps) {
     try {
-      const response = await api.post('/users', { name, email, password });
-      console.log(response.data);
+      setIsLoading(true)
+      
+      await api.post('/users', { name, email, password });
+      await signIn(email, password)
     } catch (error) {
       const isAppError = error instanceof AppError;
 
       const title = isAppError ? error.message : 'Não foi possível criar a conta. Tente novamente mais tarde';
 
       Alert.alert( 'Aviso', title)
+    } finally {
+      setIsLoading(false)
     }
   }
 
