@@ -2,14 +2,11 @@ import React from 'react'
 import { FlatList } from 'react-native';
 import { Container } from './styles'
 
-import { Header } from '@Modules/Dog/Components/Header';
+import { Header } from '@Modules/Dog/Components/HomeHeader';
 import { BoxDog } from '@Modules/Dog/Components/BoxDog';
 import { ListEmpty } from '@Components/ListEmpty';
+import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
 
-const user = {
-  avatar: 'https://avatars.githubusercontent.com/u/46832485?v=4',
-  name: 'Isakiel'
-}
 
 const data = [
 	{
@@ -67,7 +64,10 @@ const data = [
 	}
 ]
 export function Home() {
-  return (
+
+	const { user } = useAuth()
+
+	return (
     <Container>
       <Header
 				user={user}
@@ -78,14 +78,14 @@ export function Home() {
 				keyExtractor={item => item.id}
 				renderItem={({item }) => 
 					<BoxDog 
-							item={item}
-							icon='favorite-outline'
-							OnPress={() => console.log("Like the Dog:", item.id)}
+						item={item}
+						icon='favorite-outline'
+						OnPress={() => console.log("Like the Dog:", item.id)}
 					/>
 				}
 				showsVerticalScrollIndicator={false}
-				ListEmptyComponent={<ListEmpty 
-					message='Listagem de items vazia'
+				ListEmptyComponent={
+					<ListEmpty message='Listagem de items vazia'
 				/>}
 			/>      
     </Container>
