@@ -6,7 +6,6 @@ import Icon from '@expo/vector-icons/Feather'
 import Home from '@Modules/Dog/Pages/Home';
 import Favorite from '@Modules/Dog/Pages/Favorite';
 import Profile from '@Modules/Dog/Pages/Profile';
-import Details from '@Modules/Dog/Pages/Details';
 
 type AppRoutes = {
   home: undefined;
@@ -60,15 +59,6 @@ export function AppRoutes(){
       <Screen 
         name="profile"
         component={Profile}
-        options={{
-          tabBarIcon: ({ color  }) => (
-            <Icon name={'user'} color={color} size={iconSize} />
-          )
-        }}
-      />
-      <Screen 
-        name="details"
-        component={Details}
         options={{ tabBarButton: () => null }}
       />
     </Navigator>

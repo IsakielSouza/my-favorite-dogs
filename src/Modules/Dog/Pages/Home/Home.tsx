@@ -7,7 +7,7 @@ import { BoxDog } from '@Modules/Dog/Components/BoxDog';
 import { ListEmpty } from '@Components/ListEmpty';
 import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
 import { useFetcherDogs } from '@Modules/Dog/Hooks/useFetcherDogs';
-import { DogDTO } from '@Modules/Dog/Components/Dtos/DogDTO';
+import { DogDTO } from '@Modules/Dog/Dtos/DogDTO';
 import { storageFavoriteDogSave } from '@Storage/storageFavoriteDog';
 
 export function Home() {

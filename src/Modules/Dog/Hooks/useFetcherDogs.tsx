@@ -3,7 +3,7 @@ import { Alert } from 'react-native'
 import { api, headers } from '@Modules/Dog/Services/api'
 import { msDogPrefixes } from '@Modules/Dog/Services/prefixes'
 import { AppError } from '@Utils/AppError';
-import { DogDTO } from '../Components/Dtos/DogDTO';
+import { DogDTO } from '../Dtos/DogDTO';
 
 export function useFetcherDogs() {
   const [dogs, setDogs] = useState<DogDTO[]>([])

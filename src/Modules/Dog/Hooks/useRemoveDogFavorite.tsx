@@ -1,6 +1,6 @@
 import { storageFavoriteDogRemove } from '@Storage/storageFavoriteDog';
 
-import { DogDTO } from "../Components/Dtos/DogDTO"
+import { DogDTO } from "@Modules/Dog/Dtos/DogDTO"
 
 type Props = {
   handleRemoverFavorite: (dog: DogDTO) => void

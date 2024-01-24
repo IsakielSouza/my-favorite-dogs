@@ -4,7 +4,7 @@ import { Container, Header, Title } from './styles'
 
 import { BoxDog } from '@Modules/Dog/Components/BoxDog';
 import { ListEmpty } from '@Components/ListEmpty';
-import { DogDTO } from '@Modules/Dog/Components/Dtos/DogDTO';
+import { DogDTO } from '@Modules/Dog/Dtos/DogDTO';
 import { useFocusEffect } from '@react-navigation/native';
 import { storageFavoriteDogGet } from '@Storage/storageFavoriteDog';
 import { useRemoveDogFavorite } from '@Modules/Dog/Hooks/useRemoveDogFavorite';

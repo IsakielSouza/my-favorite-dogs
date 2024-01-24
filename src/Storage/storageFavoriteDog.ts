@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { DogDTO } from '@Modules/Dog/Components/Dtos/DogDTO';
+import { DogDTO } from '@Modules/Dog/Dtos/DogDTO';
 import { DOG_FAVORITE } from './storageConfig';
 
 export async function storageFavoriteDogSave(dog: DogDTO) {
