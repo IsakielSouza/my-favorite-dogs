@@ -5,7 +5,7 @@ import { msDogPrefixes } from '@Modules/Dog/Services/prefixes'
 import { AppError } from '@Utils/AppError';
 import { DogDTO } from '../Dtos/DogDTO';
 
-export function useFetcherDogs() {
+export function useGetDogs() {
   const [dogs, setDogs] = useState<DogDTO[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -13,8 +13,8 @@ export function useFetcherDogs() {
     try {
 
       const response = await api.get(msDogPrefixes.IMAGES_SEARCH, { headers});
-      console.log('HOOK', response.data)
-      setDogs(response.data);
+      
+      setDogs(state => [...state, ...response.data]);
 
     } catch (error) {
       const isAppError = error instanceof AppError;

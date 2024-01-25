@@ -5,7 +5,7 @@ import { AppError } from '@Utils/AppError';
 import { DogDTO } from '../Dtos/DogDTO';
 import { storageFavoriteDogGet } from '@Storage/storageFavoriteDog';
 
-export function useFetcherDogsFavorite() {
+export function useGetDogsFavorite() {
   const [dogs, setDogs] = useState<DogDTO[]>([])
   const [loading, setLoading] = useState(true)
 

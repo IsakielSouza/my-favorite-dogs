@@ -5,10 +5,10 @@ import { Container, Header, Title } from './styles'
 import { BoxDog } from '@Modules/Dog/Components/BoxDog';
 import { ListEmpty } from '@Components/ListEmpty';
 import { useRemoveDogFavorite } from '@Modules/Dog/Hooks/useRemoveDogFavorite';
-import { useFetcherDogsFavorite } from '@Modules/Dog/Hooks/useFetcherDogsFavorite';
+import { useGetDogsFavorite } from '@Modules/Dog/Hooks/useGetDogsFavorite';
 
 export function Favorite() {
-	const { dogs } = useFetcherDogsFavorite();
+	const { dogs } = useGetDogsFavorite();
 
 	const { handleRemoverFavorite } = useRemoveDogFavorite()
 
