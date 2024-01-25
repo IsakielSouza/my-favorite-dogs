@@ -9,64 +9,19 @@ import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
 import { useFetcherDogs } from '@Modules/Dog/Hooks/useFetcherDogs';
 import { DogDTO } from '@Modules/Dog/Dtos/DogDTO';
 import { storageFavoriteDogSave } from '@Storage/storageFavoriteDog';
+import { Loading } from '@Components/Loading';
 
 export function Home() {
 	const { user } = useAuth()
 
-	// [ ] remover
- 	/* const { dogs } = useFetcherDogs(); */
-
-	const dogs = [
-		{
-			"breeds": [],
-			"id": "8URVacxGi",
-			"url": "https://cdn2.thedogapi.com/images/8URVacxGi.jpg",
-			"width": 500,
-			"height": 331
-		},
-		{
-			"breeds": [
-				{
-					"weight": {
-						"imperial": "130 - 180",
-						"metric": "59 - 82"
-					},
-					"height": {
-						"imperial": "25.5 - 27.5",
-						"metric": "65 - 70"
-					},
-					"id": 212,
-					"name": "Saint Bernard",
-					"bred_for": "Draft, search, rescue",
-					"breed_group": "Working",
-					"life_span": "7 - 10 years",
-					"temperament": "Friendly, Lively, Gentle, Watchful, Calm",
-					"reference_image_id": "_Qf9nfRzL"
-				}
-			],
-			"id": "1d4rlnsPt",
-			"url": "https://cdn2.thedogapi.com/images/1d4rlnsPt.jpg",
-			"width": 1080,
-			"height": 1080
-		},
-		{
-			"breeds": [],
-			"id": "TXXuNa4by",
-			"url": "https://cdn2.thedogapi.com/images/TXXuNa4by.jpg",
-			"width": 2448,
-			"height": 3264
-		},
-		{
-			"breeds": [],
-			"id": "SGHnWcS9S",
-			"url": "https://cdn2.thedogapi.com/images/SGHnWcS9S.jpg",
-			"width": 443,
-			"height": 332
-		}
-	]
+ 	const { dogs, fetchDogs, loading } = useFetcherDogs();
 
 	async function handleFavoriteDog(dog: DogDTO) {
 		await storageFavoriteDogSave(dog)
+	}
+
+	if(loading) {
+		return (<Loading />)
 	}
 
 	return (
@@ -89,6 +44,9 @@ export function Home() {
 				ListEmptyComponent={
 					<ListEmpty message='Listagem de items vazia'
 				/>}
+				onEndReached={fetchDogs}
+				onEndReachedThreshold={0.1}
+      	ListFooterComponent={() => (<Loading />)}
 			/>      
     </Container>
   )

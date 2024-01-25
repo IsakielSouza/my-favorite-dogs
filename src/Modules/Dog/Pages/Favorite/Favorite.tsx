@@ -1,26 +1,16 @@
-import React, { useCallback, useState } from 'react' 
+import React from 'react' 
 import { FlatList } from 'react-native';
 import { Container, Header, Title } from './styles'
 
 import { BoxDog } from '@Modules/Dog/Components/BoxDog';
 import { ListEmpty } from '@Components/ListEmpty';
-import { DogDTO } from '@Modules/Dog/Dtos/DogDTO';
-import { useFocusEffect } from '@react-navigation/native';
-import { storageFavoriteDogGet } from '@Storage/storageFavoriteDog';
 import { useRemoveDogFavorite } from '@Modules/Dog/Hooks/useRemoveDogFavorite';
+import { useFetcherDogsFavorite } from '@Modules/Dog/Hooks/useFetcherDogsFavorite';
 
 export function Favorite() {
-	const [dogs, setDogs] = useState<DogDTO[]>([])
-	async function fetchDogs() {
-		const listDogs = await storageFavoriteDogGet()
-		setDogs(listDogs)
-	}
+	const { dogs } = useFetcherDogsFavorite();
 
 	const { handleRemoverFavorite } = useRemoveDogFavorite()
-
-	useFocusEffect(useCallback(() => {
-    fetchDogs()
-  },[dogs]))
 
   return (
     <Container>

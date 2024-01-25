@@ -29,6 +29,6 @@ export function useFetcherDogs() {
     fetchDogs();
   },[])
 
-  return { dogs, loading }
+  return { dogs, fetchDogs, loading }
 }
 
