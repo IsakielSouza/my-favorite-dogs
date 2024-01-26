@@ -6,24 +6,17 @@ import { Header } from '@Modules/Dog/Components/HomeHeader';
 import { BoxDog } from '@Modules/Dog/Components/BoxDog';
 import { ListEmpty } from '@Components/ListEmpty';
 import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
-import { useGetDogs } from '@Modules/Dog/Hooks/useFetcherDogs';
-import { DogDTO } from '@Modules/Dog/Dtos/DogDTO';
-import { storageFavoriteDogSave } from '@Storage/storageFavoriteDog';
 import { Loading } from '@Components/Loading';
+import { useSaveDogsFavorite } from '@Modules/Dog/Hooks/useSaveDogsFavorite';
+import { useGetDogs } from '@Modules/Dog/Hooks/useGetDogs';
 
 export function Home() {
 	const { user } = useAuth()
 
- 	const { dogs, fetchDogs, loading } = useGetDogs();
+	const { fetchDogs, dogs } = useGetDogs()
 
-	async function handleFavoriteDog(dog: DogDTO) {
-		await storageFavoriteDogSave(dog)
-	}
-
-	if(loading) {
-		return (<Loading />)
-	}
-
+	const { handleFavoriteDog } = useSaveDogsFavorite()
+	
 	return (
     <Container>
       <Header

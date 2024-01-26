@@ -3,18 +3,17 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DogDTO } from '@Modules/Dog/Dtos/DogDTO';
 import { DOG_FAVORITE } from './storageConfig';
 
-export async function storageFavoriteDogSave(dog: DogDTO) {
+export async function storageFavoriteDogSave(newDog: DogDTO) {
   try {
     const storedDogs = await storageFavoriteDogGet();
 
-    storedDogs.map((item)=> {
-      item.id === dog.id
-      return 
-    })
-
-    const storage = JSON.stringify([...storedDogs, dog])
-
-    await AsyncStorage.setItem(DOG_FAVORITE, storage)
+    const existingNewDog = storedDogs.find(dog => dog.id === newDog.id);
+    
+    if(!existingNewDog) {
+      storedDogs.push(newDog)
+    }
+    
+    await AsyncStorage.setItem(DOG_FAVORITE, JSON.stringify(storedDogs))
 
   } catch (error) {
     throw error;
@@ -23,9 +22,9 @@ export async function storageFavoriteDogSave(dog: DogDTO) {
 
 export async function storageFavoriteDogGet() {
   try {
-    const storage = await AsyncStorage.getItem(DOG_FAVORITE);
+    const storedDogs = await AsyncStorage.getItem(DOG_FAVORITE);
 
-    const dogs:DogDTO[] = storage ? JSON.parse(storage) : [];
+    const dogs:DogDTO[] = storedDogs ? JSON.parse(storedDogs) : [];
 
     return dogs;
   } catch (error) {
