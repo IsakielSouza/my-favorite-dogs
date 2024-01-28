@@ -1,7 +1,8 @@
 import React from 'react' 
 import { FlatList } from 'react-native';
-import { Container, Header, Title } from './styles'
+import { Container, Title } from './styles';
 
+import { Header } from '@Components/styles';
 import { BoxDog } from '@Modules/Dog/Components/BoxDog';
 import { ListEmpty } from '@Components/ListEmpty';
 import { useRemoveDogFavorite } from '@Modules/Dog/Hooks/useRemoveDogFavorite';

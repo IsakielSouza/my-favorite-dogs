@@ -9,7 +9,8 @@ import {
 }
 from 'react-native';
 import { Button } from '@Components/Button';
-import { Container, Logo, WrapperInput, ContainerLogo, Title, WrapperFooter } from './styles';
+import { Container, Logo, ContainerLogo, Title, WrapperFooter } from './styles';
+import { WrapperInput } from '@Components/styles';
 import { Input } from '@Components/Input';
 import { ButtonIcon } from '@Components/ButtonIcon';
 

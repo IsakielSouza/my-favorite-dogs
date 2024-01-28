@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Alert, Keyboard, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Container, Logo, WrapperInput, ContainerLogo, Title, WrapperFooter, TitleAlertForm } from './styles';
+import { Container, Logo, ContainerLogo, Title, WrapperFooter, TitleAlertForm } from './styles';
 import { Button } from '@Components/Button';
+import { WrapperInput } from '@Components/styles';
 import { Input } from '@Components/Input';
 import { ButtonIcon } from '@Components/ButtonIcon';
 import { useForm, Controller } from 'react-hook-form';
