@@ -11,7 +11,6 @@ type AppRoutes = {
   home: undefined;
   favorite: undefined;
   profile: undefined;
-  details: undefined;
 }
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>
@@ -59,7 +58,11 @@ export function AppRoutes(){
       <Screen 
         name="profile"
         component={Profile}
-        options={{ tabBarButton: () => null }}
+        options={{ 
+          tabBarIcon: ({ color }) => (
+            <Icon name={'user'} color={color} size={iconSize} />
+          )
+         }}
       />
     </Navigator>
   );
