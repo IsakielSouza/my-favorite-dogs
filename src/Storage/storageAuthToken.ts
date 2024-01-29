@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { AUTH_STORAGE } from './storageConfig';
+import { AUTH_STORAGE } from '@Storage/storageConfig';
 
 export async function storageAuthTokenSave(token: string) {
   await AsyncStorage.setItem(AUTH_STORAGE, token);
