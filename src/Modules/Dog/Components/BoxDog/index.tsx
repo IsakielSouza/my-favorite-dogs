@@ -10,9 +10,10 @@ type Props = {
 	};
 	icon: keyof typeof MaterialIcons.glyphMap;
 	OnPress: () => void
+	disabled?: boolean
 }
 
-export function BoxDog({ item, icon, OnPress }: Props ) {
+export function BoxDog({ item, icon, OnPress, disabled = false }: Props ) {
   return (
 		<DogWrapper>
 				<DogImage 
@@ -22,6 +23,7 @@ export function BoxDog({ item, icon, OnPress }: Props ) {
 				style={[{alignSelf: 'flex-end' }]}				 
 				icon={icon}
 				onPress={OnPress}
+				disabled={disabled}
 			/>
 			<SeparatorItem />
 		</DogWrapper>

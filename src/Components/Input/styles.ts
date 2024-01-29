@@ -7,9 +7,9 @@ export const Container = styled(TextInput)`
   min-height: 56px;
   max-height: 56px;
 
-  ${({ theme }) => css`
+  ${({ theme, editable }) => css`
     color: ${theme.COLORS.GRAY_700};
-    background-color: ${theme.COLORS.GRAY_200};
+    background-color: ${editable ? theme.COLORS.GRAY_200 : theme.COLORS.GRAY_400};
     font-family: ${theme.FONT_FAMILY.REGULAR};
     font-size: ${theme.FONT_SIZE.MD}px;
   `};

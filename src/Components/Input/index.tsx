@@ -3,7 +3,7 @@ import { useTheme } from "styled-components/native";
 
 import { Container } from "./styles";
 
-export function Input({ ...rest }: TextInputProps) {
+export function Input({ editable = true, ...rest }: TextInputProps) {
   const { COLORS } = useTheme();
 
   return (
@@ -11,6 +11,7 @@ export function Input({ ...rest }: TextInputProps) {
       placeholderTextColor={COLORS.GRAY_300}
       onSubmitEditing={Keyboard.dismiss}
       cursorColor={COLORS.VIOLET_700}
+      editable={editable}
       {...rest} 
     />
   )

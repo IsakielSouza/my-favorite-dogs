@@ -17,8 +17,9 @@ export const WrapperAvatar = styled(View)`
 `;
 
 export const Avatar = styled(Image)`
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50px;
 `;
 
 export const TextProfile = styled(Text)`
