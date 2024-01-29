@@ -23,6 +23,7 @@ import { AppError } from '@Utils/AppError';
 
 import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
 import { TitleAlertForm } from '@Modules/Authentication/Pages/SignUp/styles';
+import { api } from '@Modules/Authentication/Services/api';
 
 type FormDataProps = {
   name: string;
@@ -52,10 +53,11 @@ const profileSchema = yup.object({
 });
 
 export function Profile() {
+  const [isUpdating, setIsUpdating] = useState(false);
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
   const [userPhoto, setUserPhoto] = useState('');
 
-  const { user } = useAuth();
+  const { user, updateUserProfile } = useAuth();
 
   const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({ 
     defaultValues: { 
@@ -106,7 +108,28 @@ export function Profile() {
 
 
   async function handleProfileUpdate(data: FormDataProps) {
-    console.log(data);
+    try {
+      setIsUpdating(true);
+
+      const userUpdated = user;
+      userUpdated.name = data.name;
+      
+      await api.put('/users', data);
+
+      await updateUserProfile(userUpdated);
+
+      Alert.alert('Concluídos', 'Perfil atualizado com sucesso!')
+
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+      const title = isAppError ? error.message : 'Não foi possível atualizar os dados. Tente novamente mais tarde.';
+
+
+      Alert.alert(title, 'Não foi possível atualizar os dados. Tente novamente mais tarde.')
+      
+    } finally {
+      setIsUpdating(false);
+    }
   }
  
   return (
@@ -122,11 +145,12 @@ export function Profile() {
           <Avatar source={defaultPhotoScreen()}></Avatar>
 
           <TouchableOpacity>
-          <TextProfile
+            {/* [ ] TODO Adicionar func upload back */}
+          {/* <TextProfile 
             onPress={handleUserPhotoSelected}
           >
             Alterar foto
-            </TextProfile>
+            </TextProfile> */}
 
           </TouchableOpacity>
         </WrapperAvatar>
@@ -211,6 +235,7 @@ export function Profile() {
             title='Atualizar'
             style={[{marginTop: 32}]}
             onPress={handleSubmit(handleProfileUpdate)}
+            disabled={isUpdating}
           />
           
         </Container>
