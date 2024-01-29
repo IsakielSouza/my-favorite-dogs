@@ -5,16 +5,8 @@ import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
 import defaultUserPhotoImg from '@Assets/userPhotoDefault.png';
 import { ButtonIcon } from '@Components/ButtonIcon';
 
-type Props = {
-  user: {
-    avatar: string
-    name: string;
-  };
-}
-
-export function Header({ user }:Props) {
-
-  const { signOut} = useAuth()
+export function Header() {
+	const { user, signOut } = useAuth()
 
   return (
     <Container>
@@ -34,8 +26,6 @@ export function Header({ user }:Props) {
           onPress={signOut}
         />
       </UserWrapper>
-
-        
     </Container>
   )
 }

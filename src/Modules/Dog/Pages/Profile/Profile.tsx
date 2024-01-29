@@ -118,7 +118,7 @@ export function Profile() {
 
       await updateUserProfile(userUpdated);
 
-      Alert.alert('Concluídos', 'Perfil atualizado com sucesso!')
+      Alert.alert('Sucesso!', 'Perfil atualizado com sucesso!')
 
     } catch (error) {
       const isAppError = error instanceof AppError;
