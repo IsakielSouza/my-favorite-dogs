@@ -4,6 +4,7 @@ import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
 
 import defaultUserPhotoImg from '@Assets/userPhotoDefault.png';
 import { ButtonIcon } from '@Components/ButtonIcon';
+import { api } from '@Modules/Authentication/Services/api';
 
 export function Header() {
 	const { user, signOut } = useAuth()
@@ -13,7 +14,8 @@ export function Header() {
       <UserWrapper>
         <UserInfo>
           <Photo
-            source={user.avatar  ? { uri: user.avatar } : defaultUserPhotoImg}
+            source={
+              user.avatar  ? { uri: `${api.defaults.baseURL}/avatar/${user.avatar}` } : defaultUserPhotoImg}
           />
           <User>
             <UserGreeting>Olá,</UserGreeting>

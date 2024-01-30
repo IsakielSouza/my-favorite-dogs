@@ -18,12 +18,13 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import avatar from '@Assets/userPhotoDefault.png'
+import avatarDefault from '@Assets/userPhotoDefault.png'
 import { AppError } from '@Utils/AppError';
 
 import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
 import { TitleAlertForm } from '@Modules/Authentication/Pages/SignUp/styles';
 import { api } from '@Modules/Authentication/Services/api';
+import { Loading } from '@Components/Loading';
 
 type FormDataProps = {
   name: string;
@@ -55,7 +56,6 @@ const profileSchema = yup.object({
 export function Profile() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
-  const [userPhoto, setUserPhoto] = useState('');
 
   const { user, updateUserProfile } = useAuth();
 
@@ -68,10 +68,10 @@ export function Profile() {
   });
 
 
-  function defaultPhotoScreen() {
-    const uri  =  { uri: userPhoto }
+  function defaultAvatarScreen() {
+    const uri  =  { uri: `${api.defaults.baseURL}/avatar/${user.avatar}` }
 
-    return userPhoto ? uri : avatar
+    return user.avatar ? uri : avatarDefault
   }
 
   async function handleUserPhotoSelected() {
@@ -91,7 +91,32 @@ export function Profile() {
       }
   
       if(photoSelected.assets[0].uri) {
-        setUserPhoto(photoSelected.assets[0].uri);
+        const fileExtension = photoSelected.assets[0].uri.split('.').pop();
+
+        const photoFile = {
+          name: `${user.name}.${fileExtension}`.toLowerCase(),
+          uri: photoSelected.assets[0].uri,
+          type: `${photoSelected.assets[0].type}/${fileExtension}`
+        } as any
+
+        const userPhotoUploadForm = new FormData();
+
+        userPhotoUploadForm.append('avatar', photoFile);
+
+        const userUpdatedResponse = await api.patch('/users/avatar', userPhotoUploadForm, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+
+        const userUpdated = user;
+
+        userUpdated.avatar = userUpdatedResponse.data.avatar;
+
+        await updateUserProfile(userUpdated);
+
+        Alert.alert('Sucesso!', 'Foto atualizada!')
+
       }
     } catch (error) {
 
@@ -131,6 +156,10 @@ export function Profile() {
       setIsUpdating(false);
     }
   }
+
+  if(photoIsLoading || isUpdating) {
+    return (<Loading />)
+  }
  
   return (
     <TouchableNativeFeedback
@@ -142,15 +171,15 @@ export function Profile() {
 
         <WrapperAvatar>
 
-          <Avatar source={defaultPhotoScreen()}></Avatar>
+          <Avatar source={defaultAvatarScreen()}></Avatar>
 
           <TouchableOpacity>
-            {/* [ ] TODO Adicionar func upload back */}
-          {/* <TextProfile 
+            
+          <TextProfile 
             onPress={handleUserPhotoSelected}
           >
             Alterar foto
-            </TextProfile> */}
+            </TextProfile>
 
           </TouchableOpacity>
         </WrapperAvatar>

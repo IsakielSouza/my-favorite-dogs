@@ -5,23 +5,18 @@ import { Container } from './styles'
 import { Header } from '@Modules/Dog/Components/HomeHeader';
 import { BoxDog } from '@Modules/Dog/Components/BoxDog';
 import { ListEmpty } from '@Components/ListEmpty';
-import { useAuth } from '@Modules/Authentication/Hooks/useAuth';
 import { Loading } from '@Components/Loading';
 import { useSaveDogsFavorite } from '@Modules/Dog/Hooks/useSaveDogsFavorite';
 import { useGetDogs } from '@Modules/Dog/Hooks/useGetDogs';
 
 export function Home() {
-	const { user } = useAuth()
 
 	const { fetchDogs, dogs } = useGetDogs()
 
 	const { handleFavoriteDog } = useSaveDogsFavorite()
-	
 	return (
     <Container>
-      <Header
-				user={user}
-			/>
+      <Header/>
 
 			<FlatList 
 				data={dogs}
@@ -39,7 +34,7 @@ export function Home() {
 				/>}
 				onEndReached={fetchDogs}
 				onEndReachedThreshold={0.1}
-      	ListFooterComponent={() => (<Loading />)}
+      	ListFooterComponent={() => dogs ? (<Loading />) : null}
 			/>      
     </Container>
   )
