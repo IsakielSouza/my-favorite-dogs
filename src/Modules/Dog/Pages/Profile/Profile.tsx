@@ -13,7 +13,7 @@ import { WrapperInput } from '@Components/styles'
 import { Input } from '@Components/Input';
 import { Button } from '@Components/Button';
 import * as ImagePicker from 'expo-image-picker';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, Resolver, useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -64,7 +64,7 @@ export function Profile() {
       name: user.name,
       email: user.email
     },
-    resolver: yupResolver(profileSchema) 
+    resolver: yupResolver(profileSchema) as unknown as Resolver<FormDataProps>
   });
 
 
@@ -135,13 +135,10 @@ export function Profile() {
   async function handleProfileUpdate(data: FormDataProps) {
     try {
       setIsUpdating(true);
-
-      const userUpdated = user;
-      userUpdated.name = data.name;
       
       await api.put('/users', data);
 
-      await updateUserProfile(userUpdated);
+      await updateUserProfile({ ...user, name: data.name });
 
       Alert.alert('Sucesso!', 'Perfil atualizado com sucesso!')
 
